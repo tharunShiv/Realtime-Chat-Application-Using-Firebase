@@ -1,18 +1,10 @@
-package com.londonappbrewery.flashchatnewfirebase;
+package com.tharunshiv.flashchatnewfirebase;
 
-import android.content.SharedPreferences;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
-
 
 
 public class MainChatActivity extends AppCompatActivity {

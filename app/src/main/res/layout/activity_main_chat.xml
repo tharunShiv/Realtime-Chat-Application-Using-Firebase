@@ -7,7 +7,7 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:background="@drawable/chat_bg"
-                tools:context="com.londonappbrewery.flashchatnewfirebase.MainChatActivity">
+                tools:context="com.tharunshiv.flashchatnewfirebase.MainChatActivity">
 
     <ListView
         android:id="@+id/chat_list_view"
