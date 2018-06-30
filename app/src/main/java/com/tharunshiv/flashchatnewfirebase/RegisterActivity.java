@@ -1,7 +1,10 @@
 package com.tharunshiv.flashchatnewfirebase;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -136,16 +139,39 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if(!task.isSuccessful()){
                     Log.d("FireChat", "User Creation Failed");
+                    showErrorDialog("Registration attempt failed");
+                } else {
+                    // save only when Successful
+                    saveDisplayName();
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    finish();
+                    startActivity(intent);
                 }
             }
         });
     }
 
     // TODO: Save the display name to Shared Preferences
+    private void saveDisplayName() {
+        String displayName = mUsernameView.getText().toString();
+        // refer doc
+        SharedPreferences prefs = getSharedPreferences(CHAT_PREFS, 0);
+        // get ready to accept data in the form of key value pair
+        prefs.edit().putString(DISPLAY_NAME_KEY, displayName).apply();
+        // apply to commit
 
+    }
 
     // TODO: Create an alert dialog to show in case registration failed
+    private void showErrorDialog(String message) {
 
+        new AlertDialog.Builder(this)
+                .setTitle("Oops")
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
 
 
 
