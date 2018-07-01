@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -151,7 +153,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    // TODO: Save the display name to Shared Preferences
+   /* // TODO: Save the display name to Shared Preferences
     private void saveDisplayName() {
         String displayName = mUsernameView.getText().toString();
         // refer doc
@@ -159,6 +161,30 @@ public class RegisterActivity extends AppCompatActivity {
         // get ready to accept data in the form of key value pair
         prefs.edit().putString(DISPLAY_NAME_KEY, displayName).apply();
         // apply to commit
+
+    }   */
+
+    private void saveDisplayName() {
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        String displayName = mUsernameView.getText().toString();
+
+        if (user !=null) {
+            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(displayName)
+                    .build();
+
+            user.updateProfile(profileUpdates)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d("FireChat", "User name updated.");
+                            }
+                        }
+                    });
+
+        }
 
     }
 
